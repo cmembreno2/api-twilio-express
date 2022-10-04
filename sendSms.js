@@ -10,8 +10,8 @@ const client = require('twilio')(accountSid, authToken);
 
 client.messages
   .create({
-     body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-     from: '+14086274714',
-     to: '+50588173282'
+     body: 'Charlie este es un sms desde node.js con mi cuenta Twilio personal',
+     from: '+12534998138',
+     to: '+50558228905'
    })
   .then(message => console.log(message.sid));
