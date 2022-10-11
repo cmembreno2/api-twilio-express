@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/sendsms', async (req,res)=> {
 
-    const {recipient, sms} = req.body;
+    const {recipient} = req.body;
     console.log('Executing send sms route...')
 
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -15,7 +15,7 @@ router.post('/sendsms', async (req,res)=> {
     try{
         client.messages
         .create({
-            body: sms,
+            body: process.env.MESSAGE,
             from: process.env.FROM,
             to: recipient
         })
