@@ -13,18 +13,16 @@ router.post('/sendsms', async (req,res)=> {
     const client = require('twilio')(accountSid, authToken);
 
     try{
-        client.messages
-        .create({
+        const twilioMessage = await client.messages.create({
             body: process.env.MESSAGE,
             from: process.env.FROM,
             to: recipient
         })
-        .then(message => console.log(message.sid))
-        .catch(err => console.log(err.message));
-        
-        return res.status(200).json({message: "Sent successfully"})
+    console.log(`Sent successfully ${twilioMessage.sid}`)
+    return res.status(200).json({message: "Sent successfully"})     
     }catch (err){
-        return res.status(err.code).send(err.message);
+        console.error(`Error sending sms: ${err}`);
+        res.status(500).json({message: err.message}).send(); 
     }
 
 });
